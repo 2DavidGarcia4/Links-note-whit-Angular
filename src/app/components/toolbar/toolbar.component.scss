@@ -1,0 +1,47 @@
+.toolbar{
+  &-content{
+    width: 100%;
+    height: 100%;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    border-bottom: 2px solid var(--Border-color);
+    justify-content: space-between;
+  }
+
+  &_switch{
+    width: 60px;
+    cursor: pointer;
+    padding: 4px;
+    transition: box-shadow 0.5s ease, background-color 0.5s ease;
+    border-radius: 34px;
+    
+    &:hover{
+      box-shadow: var(--Theme-shadow);
+      background-color: var(--Background-color);
+    }
+    
+    &-circle{
+      color: var(--Theme-color);
+      width: 20px;
+      height: 20px;
+      text-shadow: 0 0 6px var(--Theme-color);
+      transition: transform 0.5s, color 0.5s ease, background-color 0.5s ease;
+      border-radius: 50%;
+      background-color: var(--Element-color);
+
+      .dark &{
+        transform: translateX(32px);
+      }
+    }
+
+    &-icon{
+      width: 100%;
+      height: 100%;
+      display: flex;
+      font-size: 16px;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+}

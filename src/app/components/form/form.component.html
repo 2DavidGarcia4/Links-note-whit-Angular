@@ -1,0 +1,21 @@
+<form class="form" >
+  <h3 class="form-title">{{ title }}</h3>
+  <mat-icon class="form-close" (click)="closeForm()" >close</mat-icon>
+
+  <div class="form-section">
+    <label class="form-label" for="name">Nombre</label>
+    <input #firstInput class="form-input" type="text" id="name" autocomplete="off" value="{{ formData?.element?.name }}" maxlength="20" required >
+  </div>
+
+  <div class="form-section">
+    <label class="form-label" for="description">Descripción</label>
+    <input class="form-input" type="text" id="description" autocomplete="off" value="{{ formData?.element?.name }}" minlength="6" maxlength="600" required >
+  </div>
+  
+  <div *ngIf="formData?.type == 'group'" class="form-section">
+    <label class="form-label" for="color">Color</label>
+    <input class="form-input" type="color" id="color" value="{{ formData?.element?.color }}" required >
+  </div>
+
+  <button class="form-button">{{ formData?.element ? 'Actualizar' : (formData?.type == 'group' ? 'Crear' : 'Agregar') }}</button>
+</form>

@@ -1,0 +1,44 @@
+<div class="header-toggle">
+  <mat-icon (click)="toggleOpen()"  class="header-toggle-icon">menu</mat-icon>
+</div>
+
+<div class="header-container" #container>
+  <div class="header_principal">
+    <div class="header_principal-image" data-name="Mostrar todos">
+      <img ngSrc="../../../favicon.ico" alt="Logo" width="40" height="40">
+    </div>
+    <div class="header_principal-text">
+      <h1 class="header_principal-title">Links note</h1>
+    </div>
+  </div>
+  
+  <ul class="header-groups">
+    <app-group class="header_group" *ngFor="let g of groups" [group]="g" [attr.data-name]="g.name"/>
+    
+    <li class="option" (click)="toggleOptionsAdd()" >
+      <div class="option-icon" data-name="Agregar">
+        <mat-icon>add</mat-icon>
+        <!-- <ng-container *ngIf="group.emoji">
+          <p class="option-icon-emoji">{{ group.emoji }}</p>
+        </ng-container> -->
+      </div>
+      
+      <div class="option-name group-name">
+        <p>Agregar</p>
+      </div>
+
+      <div *ngIf="!showOptionsAdd" class="option_add">
+        <div class="option_add-group" (click)="openForm('group')">
+          <p class="option_add-text">
+            <mat-icon class="option_add-icon">folder</mat-icon> Crea un grupo
+          </p>
+        </div>
+        <div class="option_add-link" (click)="openForm('link')">
+          <p class="option_add-text">
+            <mat-icon class="option_add-icon">article</mat-icon> Agrega un link
+          </p>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>

@@ -1,0 +1,9 @@
+<div class="header_group-icon group-icon" [style.background-color]="group.color">
+  <ng-container *ngIf="group.emoji">
+    <p class="header_group-icon-emoji">{{ group.emoji }}</p>
+  </ng-container>
+</div>
+
+<div class="header_group-name group-name">
+  <p class="header_group-name-text">{{ group.emoji }} {{ group.name }}</p>
+</div>

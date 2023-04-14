@@ -1,0 +1,33 @@
+.header_group{
+  &-icon{
+    min-width: 40px;
+    min-height: 40px;
+    display: flex;
+    transition: border-radius 0.4s, box-shadow 0.390s;
+    align-items: center;
+    border-radius: 50%;
+    justify-content: center;
+
+    &-emoji{
+      margin: 0;
+      font-size: 20px;
+    }
+    
+    &:hover{
+      box-shadow: var(--Group-shadow);
+      border-radius: 10px;
+    }
+  }
+
+  &-name{
+    opacity: 0;
+    overflow: hidden;
+    transition: opacity 0.4s 0.2s ease;
+    white-space: nowrap;
+
+    &-text{
+      width: 180px;
+      margin: 0;
+    }
+  }
+}

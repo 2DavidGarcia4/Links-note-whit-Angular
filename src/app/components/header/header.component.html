@@ -13,7 +13,7 @@
   </div>
   
   <ul class="header-groups">
-    <app-group class="header_group" *ngFor="let g of groups" [group]="g" [attr.data-name]="g.name"/>
+    <app-group class="header_group header-group" *ngFor="let g of groups" [group]="g" [attr.data-name]="g.name" (fromData)="openEditForm($event)" (deletedGroupId)="deleteGroup($event)" />
     
     <li class="option" (click)="toggleOptionsAdd()" >
       <div class="option-icon" data-name="Agregar">
@@ -27,7 +27,7 @@
         <p>Agregar</p>
       </div>
 
-      <div *ngIf="!showOptionsAdd" class="option_add">
+      <div *ngIf="showOptionsAdd" class="option_add">
         <div class="option_add-group" (click)="openForm('group')">
           <p class="option_add-text">
             <mat-icon class="option_add-icon">folder</mat-icon> Crea un grupo

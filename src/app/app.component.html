@@ -1,8 +1,8 @@
-<header class="header" (fromData)="setFormData($event)" ></header>
+<header class="header" [groups]="groups" (fromData)="setFormData($event)" (deletedGroupId)="deleteGroup($event)" ></header>
 <div class="app">
   <app-toolbar class="toolbar"></app-toolbar>
   
 </div>
-<app-form [ngClass]="{'active': formData}" [formData]="formData" (close)="resetFormData($event)"  />
+<app-form [ngClass]="{'active': formData}" [formData]="formData" [groups]="groups" (close)="resetFormData($event)" />
 
 <router-outlet></router-outlet>

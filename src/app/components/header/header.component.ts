@@ -1,6 +1,6 @@
-import { Component, ViewChild, ElementRef, Output, EventEmitter } from '@angular/core';
+import { Component, ViewChild, ElementRef, Output, EventEmitter, Input } from '@angular/core';
 import { Group } from 'src/app/models/group.model';
-import { FormCreateData } from '../../models/form.model'
+import { FormElementData } from '../../models/form.model'
 
 @Component({
   selector: 'header',
@@ -9,30 +9,10 @@ import { FormCreateData } from '../../models/form.model'
 })
 export class HeaderComponent {
   showOptionsAdd = false
-  groups: Group[] = [
-    {
-      id: 1,
-      name: 'Deporte',
-      description: 'deporte description',
-      color: '#07da07',
-      emoji: '🏃'
-    },
-    {
-      id: 2,
-      name: 'Tecnologia1214161820',
-      description: 'Tecnologia description',
-      color: '#28ABE1',
-    },
-    {
-      id: 3,
-      name: 'Juegos',
-      description: 'Juegos description',
-      color: '#28ABE1',
-      emoji: '🤪'
-    },
-  ]
+  @Input() groups!: Group[]
 
-  @Output() fromData = new EventEmitter<FormCreateData>()
+  @Output() fromData = new EventEmitter<FormElementData>()
+  @Output() deletedGroupId = new EventEmitter<number>()
   @ViewChild('container', {static: true}) containerRef!: ElementRef<HTMLDivElement>
 
   toggleOpen() {
@@ -45,7 +25,15 @@ export class HeaderComponent {
     this.showOptionsAdd = !this.showOptionsAdd
   }
 
-  openForm(type: FormCreateData['type']) {
+  openForm(type: FormElementData['type']) {
     this.fromData.emit({type})
+  }
+
+  openEditForm(group: FormElementData) {
+    this.fromData.emit(group)
+  }
+
+  deleteGroup(groupId: number) {
+    this.deletedGroupId.emit(groupId)
   }
 }

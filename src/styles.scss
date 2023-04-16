@@ -56,6 +56,11 @@ app-root{
   position: relative;
 }
 
+mat-icon{
+  width: auto !important;
+  height: auto !important;
+}
+
 .header .open {
   & .group-name{
     opacity: 1;
@@ -70,9 +75,21 @@ app-root{
       box-shadow: none;
     }
   }
+
+  & .group-icon{
+    &::after{
+      display: none;
+    }
+
+    &::before{
+      display: none;
+    }
+  }
 }
 
-mat-icon{
-  width: auto !important;
-  height: auto !important;
+.header-group:hover .group-config{
+  opacity: 1;
+  cursor: pointer;
+  pointer-events: all;
+  
 }

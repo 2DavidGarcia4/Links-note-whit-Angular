@@ -35,14 +35,21 @@
     flex-direction: column;
   }
 
+  &-group{
+    display: flex;
+    column-gap: 20px;
+  }
+
   &-label{
     cursor: pointer;
     font-size: 16px;
   }
 
   &-input{
+    color: var(--Text-color);
     border: 1px solid var(--Border-color);
-    padding: 6px 12px;
+    padding: 8px 12px;
+    font-size: 16px;
     border-radius: 6px;
     background-color: transparent;
 
@@ -51,9 +58,20 @@
     }
 
     &[type="color"]{
-      width: 50px;
-      height: 30px;
+      width: 60px;
+      height: 36px;
       padding: 4px;
+    }
+  }
+
+  &-textarea{
+    resize: none;
+    height: 36px;
+    max-height: 200px;
+    line-height: 18px;
+
+    &::-webkit-scrollbar{
+      width: 0px;
     }
   }
 
@@ -63,6 +81,7 @@
     cursor: pointer;
     padding: 10px;
     font-size: 16px;
+    margin-top: 10px;
     box-shadow: var(--Shadow);
     transition: transform 0.3s, box-shadow 0.3s;
     border-radius: 6px;

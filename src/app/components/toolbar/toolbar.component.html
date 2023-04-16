@@ -1,14 +1,12 @@
-<div class="toolbar-content">
-  <div (click)="toggleTeme()" #switchTheme class="toolbar_switch">
-    <div class="toolbar_switch-circle">
-      <ng-container *ngIf="isDark">
-        <mat-icon class="toolbar_switch-icon">dark_mode</mat-icon>
-      </ng-container>
-      
-      <ng-container *ngIf="!isDark">
-        <!-- <p>h</p> -->
-        <mat-icon class="toolbar_switch-icon" >light_mode</mat-icon>
-      </ng-container>
-    </div>
+<div (click)="toggleTeme()" #switchTheme class="toolbar_switch">
+  <div class="toolbar_switch-circle">
+    <ng-container *ngIf="isDark">
+      <mat-icon class="toolbar_switch-icon">dark_mode</mat-icon>
+    </ng-container>
+    
+    <ng-container *ngIf="!isDark">
+      <!-- <p>h</p> -->
+      <mat-icon class="toolbar_switch-icon" >light_mode</mat-icon>
+    </ng-container>
   </div>
 </div>

@@ -1,4 +1,4 @@
-<div class="header_group-icon group-icon" [style.background-color]="group.color">
+<div class="header_group-icon group-icon" [style.background-color]="group.color" [attr.data-name]="group.name">
   <ng-container *ngIf="group.emoji">
     <p class="header_group-icon-emoji">{{ group.emoji }}</p>
   </ng-container>
@@ -6,4 +6,21 @@
 
 <div class="header_group-name group-name">
   <p class="header_group-name-text">{{ group.emoji }} {{ group.name }}</p>
+</div>
+
+<div class="header_group-config group-config" #config (click)="togglePersistConfig()">
+  <mat-icon>settings</mat-icon>
+</div>
+
+<div *ngIf="showOptionsGroup" class="header_group-options">
+  <div class="header_group-options-edit" (click)="openEditForm()">
+    <p class="header_group-options-text">
+      <mat-icon class="header_group-options-icon">edit</mat-icon> Editar
+    </p>
+  </div>
+  <div class="header_group-options-delete" (click)="deleteGroup()">
+    <p class="header_group-options-text">
+      <mat-icon class="header_group-options-icon">delete</mat-icon> Eliminar
+    </p>
+  </div>
 </div>

@@ -1,5 +1,6 @@
 import { Component} from '@angular/core';
-import { FormCreateData } from './models/form.model';
+import { FormElementData } from './models/form.model';
+import { Group } from './models/group.model';
 
 @Component({
   selector: 'app-root',
@@ -7,18 +8,33 @@ import { FormCreateData } from './models/form.model';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  formData: FormCreateData | undefined = {
-    type: 'group'
-  }
+  groups: Group[] = []
+  formData: FormElementData | undefined = undefined
+  
+  
   //? Se llama después de que la vista del componente y sus hijos se hayan inicializado.
   ngAfterViewInit() {
   }
 
-  setFormData(formCreateData: FormCreateData) { 
-    this.formData = formCreateData
+  ngOnInit() {
+    if(typeof localStorage != 'undefined') {
+      const localData = localStorage.getItem('groups')
+      if(localData){
+        this.groups = JSON.parse(localData)
+      }
+    }
+  }
+
+  setFormData(formElementData: FormElementData) { 
+    this.formData = formElementData
   }
 
   resetFormData(data: undefined) {
     this.formData = data
+  }
+
+  deleteGroup(groupId: number) {
+    this.groups.splice(this.groups.findIndex(f=> f.id == groupId), 1)
+    localStorage.setItem('groups', JSON.stringify(this.groups))
   }
 }

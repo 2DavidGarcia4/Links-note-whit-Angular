@@ -1,9 +1,10 @@
-export interface FormCreateData {
+export interface FormElementData {
   type: 'group' | 'link'
   element?: {
+    id?: number
     name: string
-    position: number
     description: string,
     color?: string
+    emoji?: string
   }
 }

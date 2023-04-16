@@ -1,5 +1,8 @@
 import { Component, OnChanges, ElementRef, Input, Output, EventEmitter, ViewChild } from '@angular/core';
-import { FormCreateData } from 'src/app/models/form.model';
+import { FormBuilder, FormGroup, Validators, NgForm, Form } from '@angular/forms'
+import { FormElementData } from 'src/app/models/form.model';
+import { Group } from 'src/app/models/group.model';
+import {  } from '@angular/forms'
 
 @Component({
   selector: 'app-form',
@@ -8,12 +11,71 @@ import { FormCreateData } from 'src/app/models/form.model';
 })
 export class FormComponent implements OnChanges {
   title = ''
-  @Input() formData?: FormCreateData = undefined
+  @Input() formData?: FormElementData = undefined
+  @Input() groups!: Group[]
   @Output() close = new EventEmitter<undefined>()
+  @Output() group = new EventEmitter<Group>()
+  @ViewChild('form', {static: true}) formRef!: ElementRef<HTMLFormElement> 
   @ViewChild('firstInput', {static: true}) firtsInputRef!: ElementRef<HTMLInputElement> 
-
+  @ViewChild('textArea', {static: true}) textAreaRef!: ElementRef<HTMLTextAreaElement>
+  myForm!: FormGroup
   
-  ngOnChanges(): void {
+
+  ngOnInit() {
+    this.formRef.nativeElement.addEventListener('submit', (event: SubmitEvent)=> {
+      event.preventDefault()
+      
+      const name = this.formRef.nativeElement['nameIt'].value
+      const description = this.formRef.nativeElement['description'].value
+      const color = this.formRef.nativeElement['color'].value
+      const emoji = this.formRef.nativeElement['emoji'].value
+      
+      // console.log({name, description, color, emoji})
+
+      if(this.formData?.type == 'group'){
+        if(this.formData.element){
+          const group = this.groups.find(g=> g.id == this.formData?.element?.id)
+          if(group){
+            group.name = name
+            group.description = description
+            group.color = color
+            group.emoji = emoji
+          }
+          localStorage.setItem('groups', JSON.stringify(this.groups))
+
+        }else{
+          let id = 0, v = 1
+          for(let i=0; i<v; i++){
+            const generation = Math.floor(Math.random()*8888)+1111
+            if(this.groups?.some(s=> s.id==generation)){
+              v++
+            }else id = generation
+          }
+
+          this.groups.push({
+            id, 
+            name, 
+            description, 
+            color: color == '#000000' ? '#cccccc' : color, 
+            emoji: /\p{Emoji}/gu.test(emoji) ? emoji : undefined
+          })
+
+          localStorage.setItem('groups', JSON.stringify(this.groups))
+        }
+      }else{
+
+      }
+
+
+      this.formRef.nativeElement['nameIt'].value = ''
+      this.formRef.nativeElement['description'].value = ''
+      this.formRef.nativeElement['emoji'].value = ''
+      
+      this.closeForm()
+    })
+  }
+  
+  ngOnChanges() {
     if(this.formData){
       this.title = this.formData ? (this.formData.element ? `Editar ${this.formData.type == 'group' ? 'grupo' : 'link'}` : this.formData.type == 'group' ? 'Crear grupo' : 'Agregar link') : ''
       this.firtsInputRef.nativeElement.focus()
@@ -22,5 +84,32 @@ export class FormComponent implements OnChanges {
 
   closeForm() {
     this.close.emit(undefined)
+  }
+
+  hendleKeyUp(event: KeyboardEvent) {
+    const textArea = event.currentTarget as HTMLTextAreaElement
+    const textAreaStyle = textArea.style
+    textAreaStyle.height = `38px`
+    const scHeight = textArea.scrollHeight, newHeight = `${scHeight}px`
+    if(textAreaStyle.height != newHeight){
+      textAreaStyle.height = newHeight
+    }
+  }
+
+  handleSubmit(event: Event) {
+    event.preventDefault()
+    console.log('submit')
+    // if(this.formData?.type == 'group'){
+    //   if(!value.color) value.color = '#cccccc'
+    //   let id = 0, v = 1
+    //   for(let i=0; i<v; i++){
+    //     const generation = Math.floor(Math.random()*8888)+1111
+    //     if(this.groups?.some(s=> s.id==generation)){
+    //       v++
+    //     }else id = generation
+    //   }
+    //   this.group.emit({id, ...value})
+    // }
+    
   }
 }

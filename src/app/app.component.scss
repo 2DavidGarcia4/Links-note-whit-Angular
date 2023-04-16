@@ -22,8 +22,10 @@
   height: 64px;
   z-index: 100;
   display: flex;
+  padding-right: 20px;
+  align-items: center;
+  justify-content: flex-end;
   transition: background-color 0.5s ease, border 0.5s ease;
-  padding-left: 64px;
   background-color: var(--Element-color);
 }
 

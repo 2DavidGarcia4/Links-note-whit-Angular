@@ -22,7 +22,7 @@ import { FormComponent } from './components/form/form.component';
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
     AppRoutingModule,
     MatIconModule,
-    NgOptimizedImage
+    NgOptimizedImage,
   ],
   providers: [],
   bootstrap: [AppComponent]

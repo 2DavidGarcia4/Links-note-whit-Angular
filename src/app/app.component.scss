@@ -1,5 +1,6 @@
 :host{
   display: flex;
+  position: relative;
 }
 
 .app{
@@ -43,4 +44,33 @@ app-form{
   &.active{
     transform: scale(1);
   }
+}
+
+.tooltip{
+  z-index: 400;
+  padding: 4px 8px;
+  position: absolute;
+  transform: translateY(-50%);
+  display: flex;
+  box-shadow: var(--Shadow); 
+  white-space: nowrap;
+  align-items: center;
+  border-radius: 4px;
+  pointer-events: none;
+  justify-content: center;
+  background-color: var(--Tooltip-color);
+
+  &::before{
+    content: '';
+    border: 7px solid transparent;
+    z-index: 2;
+    position: absolute;
+    pointer-events: none;
+    border-right-color: var(--Tooltip-color);
+    border-right-width: 8px; 
+  }
+}
+
+.left::before{
+  left: -14px;
 }

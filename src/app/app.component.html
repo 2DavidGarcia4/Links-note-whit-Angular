@@ -1,8 +1,11 @@
-<header class="header" [groups]="groups" (fromData)="setFormData($event)" (deletedGroupId)="deleteGroup($event)" ></header>
+<header class="header" [groups]="groups" (fromData)="setFormData($event)" (deletedGroupId)="deleteGroup($event)" (tooltip)="createTooltip($event)" ></header>
 <div class="app">
   <app-toolbar class="toolbar"></app-toolbar>
   
 </div>
 <app-form [ngClass]="{'active': formData}" [formData]="formData" [groups]="groups" (close)="resetFormData($event)" />
+<div *ngIf="tooltip" class="tooltip {{ tooltip.direction }}"  [style.top]="tooltip.top+'px'" [style.left]="tooltip.left+'px'" >
+  {{ tooltip.content }}
+</div>
 
 <router-outlet></router-outlet>

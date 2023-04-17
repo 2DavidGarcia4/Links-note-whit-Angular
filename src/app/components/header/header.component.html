@@ -4,7 +4,7 @@
 
 <div class="header-container" #container>
   <div class="header_principal">
-    <div class="header_principal-image" data-name="Mostrar todos">
+    <div class="header_principal-image" data-name="Mostrar todos" #principalImg (mouseover)="createTooltip('Mostrar todos')" (mouseleave)="deleteTooltip()" >
       <img ngSrc="../../../favicon.ico" alt="Logo" width="40" height="40">
     </div>
     <div class="header_principal-text">
@@ -13,9 +13,9 @@
   </div>
   
   <ul class="header-groups">
-    <app-group class="header_group header-group" *ngFor="let g of groups" [group]="g" [attr.data-name]="g.name" (fromData)="openEditForm($event)" (deletedGroupId)="deleteGroup($event)" />
+    <app-group class="header_group header-group" *ngFor="let g of groups" [group]="g" [attr.data-name]="g.name" [isOpen]="isOpen" (fromData)="openEditForm($event)" (deletedGroupId)="deleteGroup($event)" (tooltip)="emitTooltip($event)" />
     
-    <li class="option" (click)="toggleOptionsAdd()" >
+    <li class="option" (click)="toggleOptionsAdd()" #addOption  (mousemove)="createOptionTooltip()" (mouseleave)="deleteTooltip" >
       <div class="option-icon" data-name="Agregar">
         <mat-icon>add</mat-icon>
         <!-- <ng-container *ngIf="group.emoji">

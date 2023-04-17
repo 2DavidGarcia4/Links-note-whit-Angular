@@ -1,6 +1,7 @@
 import { Component} from '@angular/core';
 import { FormElementData } from './models/form.model';
 import { Group } from './models/group.model';
+import { Tooltip } from './models/tooltipo.model';
 
 @Component({
   selector: 'app-root',
@@ -10,6 +11,7 @@ import { Group } from './models/group.model';
 export class AppComponent {
   groups: Group[] = []
   formData: FormElementData | undefined = undefined
+  tooltip: Tooltip | undefined = undefined 
   
   
   //? Se llama después de que la vista del componente y sus hijos se hayan inicializado.
@@ -36,5 +38,10 @@ export class AppComponent {
   deleteGroup(groupId: number) {
     this.groups.splice(this.groups.findIndex(f=> f.id == groupId), 1)
     localStorage.setItem('groups', JSON.stringify(this.groups))
+  }
+
+  createTooltip(tooltipData: Tooltip | undefined) {
+    console.log(tooltipData)
+    this.tooltip = tooltipData
   }
 }

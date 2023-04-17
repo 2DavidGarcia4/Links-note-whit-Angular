@@ -8,19 +8,6 @@
   <p class="header_group-name-text">{{ group.emoji }} {{ group.name }}</p>
 </div>
 
-<div class="header_group-config group-config" #config (click)="togglePersistConfig()">
+<div class="header_group-config group-config" #config (click)="toggleOptions('element')">
   <mat-icon>settings</mat-icon>
-</div>
-
-<div *ngIf="showOptionsGroup" class="header_group-options">
-  <div class="header_group-options-edit" (click)="openEditForm()">
-    <p class="header_group-options-text">
-      <mat-icon class="header_group-options-icon">edit</mat-icon> Editar
-    </p>
-  </div>
-  <div class="header_group-options-delete" (click)="deleteGroup()">
-    <p class="header_group-options-text">
-      <mat-icon class="header_group-options-icon">delete</mat-icon> Eliminar
-    </p>
-  </div>
 </div>

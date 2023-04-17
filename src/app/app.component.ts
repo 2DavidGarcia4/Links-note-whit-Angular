@@ -1,7 +1,6 @@
 import { Component} from '@angular/core';
-import { FormElementData } from './models/form.model';
-import { Group } from './models/group.model';
-import { Tooltip } from './models/tooltipo.model';
+import { Group, Tooltip, Option, FocusedElement, FormElementData } from './models';
+
 
 @Component({
   selector: 'app-root',
@@ -10,8 +9,10 @@ import { Tooltip } from './models/tooltipo.model';
 })
 export class AppComponent {
   groups: Group[] = []
-  formData: FormElementData | undefined = undefined
-  tooltip: Tooltip | undefined = undefined 
+  focusedElement: FocusedElement | undefined
+  formData?: FormElementData
+  tooltip: Tooltip | undefined 
+  option: Option | undefined
   
   
   //? Se llama después de que la vista del componente y sus hijos se hayan inicializado.
@@ -27,12 +28,24 @@ export class AppComponent {
     }
   }
 
-  setFormData(formElementData: FormElementData) { 
-    this.formData = formElementData
+  setFormType(type: FormElementData['type']) {
+    this.formData = {type}
+    this.option = undefined
   }
 
-  resetFormData(data: undefined) {
-    this.formData = data
+  setFocusedElement(element?: FocusedElement) { 
+    this.focusedElement = element
+  }
+
+  closeForm(){
+    this.formData = undefined
+  }
+
+  openEditForm() {
+    this.option = undefined
+    if(this.focusedElement){
+      this.formData = {type: this.focusedElement.type, element: this.focusedElement}
+    }
   }
 
   deleteGroup(groupId: number) {
@@ -41,7 +54,10 @@ export class AppComponent {
   }
 
   createTooltip(tooltipData: Tooltip | undefined) {
-    console.log(tooltipData)
     this.tooltip = tooltipData
+  }
+
+  updateOption(op: Option | undefined) {
+    this.option = op
   }
 }

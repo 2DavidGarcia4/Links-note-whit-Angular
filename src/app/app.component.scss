@@ -47,7 +47,7 @@ app-form{
 }
 
 .tooltip{
-  z-index: 400;
+  z-index: 200;
   padding: 4px 8px;
   position: absolute;
   transform: translateY(-50%);
@@ -73,4 +73,40 @@ app-form{
 
 .left::before{
   left: -14px;
+}
+
+
+//! Options
+.options{
+  z-index: 210;
+  padding: 10px 0;
+  position: absolute;
+  transform: translateY(-50%);
+  box-shadow: var(--Shadow);
+  transition: background-color 0.5s ease, box-shadow 0.5s ease;
+  border-radius: 6px;
+  background-color: var(--Element-color);
+
+  &-text{
+    margin: 0;
+    display: flex;
+    column-gap: 4px;
+    align-items: center;
+  }
+
+  &-icon{
+    width: 20px;
+    height: 20px;
+    font-size: 18px;
+  }
+
+  &-option{
+    cursor: pointer;
+    padding: 4px 10px;
+    white-space: nowrap;
+
+    &:hover{
+      background-color: var(--Background-color);
+    }
+  }
 }

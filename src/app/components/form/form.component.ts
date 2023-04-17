@@ -1,8 +1,5 @@
 import { Component, OnChanges, ElementRef, Input, Output, EventEmitter, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, NgForm, Form } from '@angular/forms'
-import { FormElementData } from 'src/app/models/form.model';
-import { Group } from 'src/app/models/group.model';
-import {  } from '@angular/forms'
+import { Group, FormElementData } from 'src/app/models';
 
 @Component({
   selector: 'app-form',
@@ -11,14 +8,13 @@ import {  } from '@angular/forms'
 })
 export class FormComponent implements OnChanges {
   title = ''
-  @Input() formData?: FormElementData = undefined
+  @Input() formData?: FormElementData
   @Input() groups!: Group[]
   @Output() close = new EventEmitter<undefined>()
   @Output() group = new EventEmitter<Group>()
   @ViewChild('form', {static: true}) formRef!: ElementRef<HTMLFormElement> 
   @ViewChild('firstInput', {static: true}) firtsInputRef!: ElementRef<HTMLInputElement> 
   @ViewChild('textArea', {static: true}) textAreaRef!: ElementRef<HTMLTextAreaElement>
-  myForm!: FormGroup
   
 
   ngOnInit() {
@@ -77,7 +73,7 @@ export class FormComponent implements OnChanges {
   
   ngOnChanges() {
     if(this.formData){
-      this.title = this.formData ? (this.formData.element ? `Editar ${this.formData.type == 'group' ? 'grupo' : 'link'}` : this.formData.type == 'group' ? 'Crear grupo' : 'Agregar link') : ''
+      this.title = (this.formData.element ? `Editar ${this.formData.type == 'group' ? 'grupo' : 'link'}` : this.formData.type == 'group' ? 'Crear grupo' : 'Agregar link')
       this.firtsInputRef.nativeElement.focus()
     }
   }
@@ -94,22 +90,5 @@ export class FormComponent implements OnChanges {
     if(textAreaStyle.height != newHeight){
       textAreaStyle.height = newHeight
     }
-  }
-
-  handleSubmit(event: Event) {
-    event.preventDefault()
-    console.log('submit')
-    // if(this.formData?.type == 'group'){
-    //   if(!value.color) value.color = '#cccccc'
-    //   let id = 0, v = 1
-    //   for(let i=0; i<v; i++){
-    //     const generation = Math.floor(Math.random()*8888)+1111
-    //     if(this.groups?.some(s=> s.id==generation)){
-    //       v++
-    //     }else id = generation
-    //   }
-    //   this.group.emit({id, ...value})
-    // }
-    
   }
 }

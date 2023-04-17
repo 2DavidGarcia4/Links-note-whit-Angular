@@ -1,7 +1,5 @@
 import { Component, Input, ViewChild, ElementRef, Output, EventEmitter } from '@angular/core';
-import { FormElementData } from 'src/app/models/form.model';
-import { Group } from 'src/app/models/group.model';
-import { Tooltip } from 'src/app/models/tooltipo.model';
+import { Group, FocusedElement, Tooltip, Option } from 'src/app/models';
 
 @Component({
   selector: 'app-group',
@@ -9,29 +7,32 @@ import { Tooltip } from 'src/app/models/tooltipo.model';
   styleUrls: ['./group.component.scss']
 })
 export class GroupComponent {
-  showOptionsGroup = false
   @Input() group!: Group;
   @Input() isOpen!: Boolean;
-  @Output() fromData = new EventEmitter<FormElementData>()
-  @Output() deletedGroupId = new EventEmitter<number>()
+  @Input() option: Option | undefined
+
   @Output() tooltip = new EventEmitter<Tooltip | undefined>()
+  @Output() optionEvent = new EventEmitter<Option | undefined>()
+  @Output() focusedElement = new EventEmitter<FocusedElement | undefined>()
+
   @ViewChild('config', {static: true}) configRef!: ElementRef<HTMLDivElement> 
   @ViewChild('options', {static: true}) optionsRef!: ElementRef<HTMLDListElement>
   @ViewChild('icon', {static: true}) iconRef!: ElementRef<HTMLDivElement>
 
-  togglePersistConfig() {
-    this.configRef.nativeElement.classList.toggle('persist')
-    this.showOptionsGroup = !this.showOptionsGroup
-  }
 
-  openEditForm() {
-    this.togglePersistConfig()
-    this.fromData.emit({type: 'group', element: {...this.group}})
-  }
-
-  deleteGroup() {
-    this.togglePersistConfig()
-    this.deletedGroupId.emit(this.group.id)
+  toggleOptions(type: Option['type']) {
+    if(this.option){
+      this.optionEvent.emit(undefined)
+    
+    }else{
+      const rect = this.configRef.nativeElement.getBoundingClientRect()
+      this.optionEvent.emit({
+        top: rect.top+Math.floor(rect.height/2),
+        left: rect.left+rect.width+26,
+        type
+      })
+      this.focusedElement.emit({...this.group, type: 'group'})
+    }
   }
 
   createTooltip() {

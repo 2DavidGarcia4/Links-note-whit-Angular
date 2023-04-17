@@ -1,7 +1,5 @@
 import { Component, ViewChild, ElementRef, Output, EventEmitter, Input } from '@angular/core';
-import { Group } from 'src/app/models/group.model';
-import { FormElementData } from '../../models/form.model'
-import { Tooltip } from 'src/app/models/tooltipo.model';
+import { Group, Tooltip, Option, FocusedElement } from 'src/app/models';
 
 @Component({
   selector: 'header',
@@ -9,13 +7,15 @@ import { Tooltip } from 'src/app/models/tooltipo.model';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent {
-  showOptionsAdd = false
   isOpen = false
   @Input() groups!: Group[]
+  @Input() option: Option | undefined
 
-  @Output() fromData = new EventEmitter<FormElementData>()
   @Output() deletedGroupId = new EventEmitter<number>()
   @Output() tooltip = new EventEmitter<Tooltip | undefined>()
+  @Output() optionEvent = new EventEmitter<Option | undefined>()
+  @Output() focusedElement = new EventEmitter<FocusedElement | undefined>()
+
   @ViewChild('container', {static: true}) containerRef!: ElementRef<HTMLDivElement>
   @ViewChild('principalImg', {static: true}) principalImgRef!: ElementRef<HTMLDivElement>
   @ViewChild('addOption', {static: true}) addOptionRef!: ElementRef<HTMLDivElement>
@@ -27,24 +27,16 @@ export class HeaderComponent {
     }
   }
 
-  toggleOptionsAdd() {
-    this.showOptionsAdd = !this.showOptionsAdd
-  }
-
-  openForm(type: FormElementData['type']) {
-    this.fromData.emit({type})
-  }
-
-  openEditForm(group: FormElementData) {
-    this.fromData.emit(group)
-  }
-
-  deleteGroup(groupId: number) {
-    this.deletedGroupId.emit(groupId)
+  emitFocusedElement(element?: FocusedElement) {
+    this.focusedElement.emit(element)
   }
 
   emitTooltip(tooltipData: Tooltip | undefined) {
     this.tooltip.emit(tooltipData)
+  }
+
+  emitOption(optionData: Option | undefined) {
+    this.optionEvent.emit(optionData)
   }
 
   createTooltip(content: string) {
@@ -74,6 +66,20 @@ export class HeaderComponent {
   deleteTooltip() {
     if(!this.isOpen){
       this.tooltip.emit(undefined)
+    }
+  }
+
+  toggleOptions(type: Option['type']) {
+    if(this.option){
+      this.optionEvent.emit(undefined)
+    
+    }else{
+      const rect = this.addOptionRef.nativeElement.getBoundingClientRect()
+      this.optionEvent.emit({
+        top: rect.top+Math.floor(rect.height/2),
+        left: rect.left+rect.width+26,
+        type
+      })
     }
   }
 }

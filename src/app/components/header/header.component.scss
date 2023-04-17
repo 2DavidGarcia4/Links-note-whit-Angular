@@ -25,7 +25,7 @@
     bottom: 0;
     width: 100%;
     height: calc(100% - 64px);
-    padding: 12px 12px 12px 12px;
+    padding: 12px 12px 20px 12px;
     display: flex;
     position: absolute;
     box-sizing: border-box;
@@ -182,41 +182,6 @@
 
     & p{
       margin: 0;
-    }
-  }
-
-  &_add{
-    right: 0;
-    cursor: auto;
-    transform: translateX(calc(100% + 30px));
-    padding: 10px 0;
-    position: absolute;
-    box-shadow: var(--Shadow);
-    transition: background-color 0.5s ease, box-shadow 0.5s ease;
-    border-radius: 6px;
-    background-color: var(--Element-color);
-
-    &-text{
-      margin: 0;
-      display: flex;
-      column-gap: 4px;
-      align-items: center;
-    }
-
-    &-icon{
-      width: 20px;
-      height: 20px;
-      font-size: 18px;
-    }
-
-    &-group, &-link{
-      cursor: pointer;
-      padding: 4px 10px;
-      white-space: nowrap;
-
-      &:hover{
-        background-color: var(--Background-color);
-      }
     }
   }
 }

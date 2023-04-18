@@ -14,6 +14,7 @@ export class GroupComponent {
   @Output() tooltip = new EventEmitter<Tooltip | undefined>()
   @Output() optionEvent = new EventEmitter<Option | undefined>()
   @Output() focusedElement = new EventEmitter<FocusedElement | undefined>()
+  @Output() configRefOutput = new EventEmitter<ElementRef<HTMLDivElement>>()
 
   @ViewChild('config', {static: true}) configRef!: ElementRef<HTMLDivElement> 
   @ViewChild('options', {static: true}) optionsRef!: ElementRef<HTMLDListElement>
@@ -21,6 +22,8 @@ export class GroupComponent {
 
 
   toggleOptions(type: Option['type']) {
+    this.configRef.nativeElement.classList.toggle('persist')
+    this.configRefOutput.emit(this.configRef)
     if(this.option){
       this.optionEvent.emit(undefined)
     
@@ -28,7 +31,7 @@ export class GroupComponent {
       const rect = this.configRef.nativeElement.getBoundingClientRect()
       this.optionEvent.emit({
         top: rect.top+Math.floor(rect.height/2),
-        left: rect.left+rect.width+26,
+        left: rect.left+rect.width+16,
         type
       })
       this.focusedElement.emit({...this.group, type: 'group'})

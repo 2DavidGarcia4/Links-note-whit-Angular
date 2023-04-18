@@ -1,5 +1,5 @@
 import { Component, OnChanges, ElementRef, Input, Output, EventEmitter, ViewChild } from '@angular/core';
-import { Group, FormElementData } from 'src/app/models';
+import { Group, FormElementData, Link } from 'src/app/models';
 
 @Component({
   selector: 'app-form',
@@ -10,8 +10,8 @@ export class FormComponent implements OnChanges {
   title = ''
   @Input() formData?: FormElementData
   @Input() groups!: Group[]
+  @Input() links!: Link[]
   @Output() close = new EventEmitter<undefined>()
-  @Output() group = new EventEmitter<Group>()
   @ViewChild('form', {static: true}) formRef!: ElementRef<HTMLFormElement> 
   @ViewChild('firstInput', {static: true}) firtsInputRef!: ElementRef<HTMLInputElement> 
   @ViewChild('textArea', {static: true}) textAreaRef!: ElementRef<HTMLTextAreaElement>
@@ -23,12 +23,13 @@ export class FormComponent implements OnChanges {
       
       const name = this.formRef.nativeElement['nameIt'].value
       const description = this.formRef.nativeElement['description'].value
-      const color = this.formRef.nativeElement['color'].value
-      const emoji = this.formRef.nativeElement['emoji'].value
       
       // console.log({name, description, color, emoji})
 
       if(this.formData?.type == 'group'){
+        const emoji = this.formRef.nativeElement['emoji'].value
+        const color = this.formRef.nativeElement['color'].value
+
         if(this.formData.element){
           const group = this.groups.find(g=> g.id == this.formData?.element?.id)
           if(group){
@@ -58,14 +59,48 @@ export class FormComponent implements OnChanges {
 
           localStorage.setItem('groups', JSON.stringify(this.groups))
         }
-      }else{
 
+        this.formRef.nativeElement['emoji'].value = ''
+
+      }else{
+        const url = this.formRef.nativeElement['url'].value
+        const group = this.formRef.nativeElement['group'].value
+        console.log({group})
+
+        if(this.formData?.element){
+          const link = this.links.find(l=> l.id == this.formData?.element?.id)
+          if(link){
+            link.name = name
+            link.description = description
+            
+            if(group) link.groupId = parseInt(group) 
+          }
+          localStorage.setItem('links', JSON.stringify(this.links))
+
+        }else{
+          let id = 0, v = 1
+          for(let i=0; i<v; i++){
+            const generation = Math.floor(Math.random()*888888)+111111
+            if(this.groups?.some(s=> s.id==generation)){
+              v++
+            }else id = generation
+          }
+
+          this.links.push({
+            id, 
+            url,
+            name, 
+            groupId: group ? parseInt(group) : undefined,
+            description, 
+          })
+
+          localStorage.setItem('links', JSON.stringify(this.links))
+        }
       }
 
 
       this.formRef.nativeElement['nameIt'].value = ''
       this.formRef.nativeElement['description'].value = ''
-      this.formRef.nativeElement['emoji'].value = ''
       
       this.closeForm()
     })

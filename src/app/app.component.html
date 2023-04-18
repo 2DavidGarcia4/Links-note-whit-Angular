@@ -1,9 +1,6 @@
-<header class="header" [groups]="groups" [option]="option" (focusedElement)="setFocusedElement($event)" (tooltip)="createTooltip($event)" (optionEvent)="updateOption($event)" ></header>
-<div class="app">
-  <app-toolbar class="toolbar"></app-toolbar>
-  
-</div>
-<app-form [ngClass]="{'active': formData}" [formData]="formData" [groups]="groups" (close)="closeForm()" />
+<header class="header" [groups]="groups" [option]="option" (focusedElement)="setFocusedElement($event)" (tooltip)="createTooltip($event)" (optionEvent)="updateOption($event)" (configRefOutput)="setFocusedOptionRef($event)" ></header>
+
+<app-form [ngClass]="{'active': formData}" [formData]="formData" [groups]="groups" [links]="links" (close)="closeForm()" />
 
 <div *ngIf="tooltip" class="tooltip {{ tooltip.direction }}"  [style.top]="tooltip.top+'px'" [style.left]="tooltip.left+'px'" >
   {{ tooltip.content }}
@@ -29,7 +26,7 @@
         <mat-icon class="options-icon">edit</mat-icon> Editar
       </p>
     </div>
-    <div class="options-option" (click)="openEditForm()">
+    <div class="options-option" (click)="deleteElement()">
       <p class="options-text">
         <mat-icon class="options-icon">delete</mat-icon> Eliminar
       </p>

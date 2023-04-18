@@ -1,5 +1,5 @@
-import { Component} from '@angular/core';
-import { Group, Tooltip, Option, FocusedElement, FormElementData } from './models';
+import { Component, ElementRef} from '@angular/core';
+import { Group, Tooltip, Option, FocusedElement, FormElementData, Link } from './models';
 
 
 @Component({
@@ -9,10 +9,12 @@ import { Group, Tooltip, Option, FocusedElement, FormElementData } from './model
 })
 export class AppComponent {
   groups: Group[] = []
-  focusedElement: FocusedElement | undefined
+  links: Link[] = []
+  focusedElement?: FocusedElement
+  focusedOptionRef?: ElementRef<HTMLDivElement>
   formData?: FormElementData
-  tooltip: Tooltip | undefined 
-  option: Option | undefined
+  tooltip?: Tooltip 
+  option?: Option
   
   
   //? Se llama después de que la vista del componente y sus hijos se hayan inicializado.
@@ -21,9 +23,14 @@ export class AppComponent {
 
   ngOnInit() {
     if(typeof localStorage != 'undefined') {
-      const localData = localStorage.getItem('groups')
-      if(localData){
-        this.groups = JSON.parse(localData)
+      const localGroupsData = localStorage.getItem('groups')
+      const localLinksData = localStorage.getItem('links')
+      if(localGroupsData){
+        this.groups = JSON.parse(localGroupsData)
+      }
+
+      if(localLinksData){
+        this.links = JSON.parse(localLinksData)
       }
     }
   }
@@ -46,11 +53,25 @@ export class AppComponent {
     if(this.focusedElement){
       this.formData = {type: this.focusedElement.type, element: this.focusedElement}
     }
+    this.focusedOptionRef?.nativeElement.classList.remove('persist')
   }
 
-  deleteGroup(groupId: number) {
-    this.groups.splice(this.groups.findIndex(f=> f.id == groupId), 1)
-    localStorage.setItem('groups', JSON.stringify(this.groups))
+  deleteElement() {
+    if(typeof document != 'undefined') {
+      document.querySelector('.group-config')?.classList.remove('persist')
+    }
+    this.option = undefined
+    if(this.focusedElement){
+      if(this.focusedElement.type == 'group'){
+        this.groups.splice(this.groups.findIndex(f=> f.id == this.focusedElement?.id), 1)
+        localStorage.setItem('groups', JSON.stringify(this.groups))
+      
+      }else{
+        this.links.splice(this.links.findIndex(f=> f.id == this.focusedElement?.id), 1)
+        localStorage.setItem('links', JSON.stringify(this.links))
+      }
+    }
+    this.focusedOptionRef?.nativeElement.classList.remove('persist')
   }
 
   createTooltip(tooltipData: Tooltip | undefined) {
@@ -59,5 +80,9 @@ export class AppComponent {
 
   updateOption(op: Option | undefined) {
     this.option = op
+  }
+
+  setFocusedOptionRef(ref: ElementRef<HTMLDivElement>) {
+    this.focusedOptionRef = ref
   }
 }

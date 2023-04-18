@@ -62,17 +62,31 @@
       height: 36px;
       padding: 4px;
     }
+
+    &[type="select"]{
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+    }
   }
 
   &-textarea{
     resize: none;
-    height: 36px;
+    min-height: 36px;
     max-height: 200px;
     line-height: 18px;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
 
     &::-webkit-scrollbar{
       width: 0px;
     }
+  }
+
+  &-option{
+    color: var(--Text-color);
+    font-size: 16px;
+    padding: 2px 0;
+    background-color: var(--Element-color);
   }
 
   &-button{

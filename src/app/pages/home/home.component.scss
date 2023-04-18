@@ -1,0 +1,41 @@
+:host{
+  width: 100%;
+  display: flex;
+  min-height: 100%;
+  flex-direction: column;
+}
+
+.toolbar{
+  width: 100%;
+  height: 64px;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  transition: background-color 0.5s ease, border 0.5s ease;
+  padding-right: 20px;
+  border-bottom: 2px solid var(--Border-color);
+  justify-content: flex-end;
+  background-color: var(--Element-color);
+}
+
+.links{
+  gap: 20px;
+  display: flex;
+  padding: 20px 20px 40px 20px;
+  flex-wrap: wrap;
+  max-height: calc(100dvh - 64px);
+  justify-content: center;
+}
+
+app-link-card{
+  width: 86px;
+  cursor: pointer;
+  padding: 10px;
+  display: flex;
+  row-gap: 6px;
+  position: relative;
+  box-shadow: var(--Shadow);
+  border-radius: 6px;
+  flex-direction: column;
+  background-color: var(--Element-color);
+}

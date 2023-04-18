@@ -11,7 +11,12 @@
 
   <div class="form-section">
     <label class="form-label" for="description">Descripción</label>
-    <textarea (keyup)="hendleKeyUp($event)" class="form-input form-textarea" name="description" id="description" autocomplete="off" value="{{ formData?.element?.description}}" minlength="6" maxlength="600" required > </textarea>
+    <textarea (keyup)="hendleKeyUp($event)" class="form-input form-textarea" name="description" id="description" autocomplete="off" value="{{ formData?.element?.description}}" minlength="6" maxlength="600" > </textarea>
+  </div>
+
+  <div class="form-section" *ngIf="formData?.type == 'link'">
+    <label class="form-label" for="url">Url</label>
+    <input #firstInput class="form-input" name="url" type="url" id="url" autocomplete="off" value="{{ formData?.element?.url || '' }}" required >
   </div>
   
   <div class="form-group" *ngIf="formData?.type == 'group'" >
@@ -24,6 +29,14 @@
       <label class="form-label" for="emoji">Emoji</label>
       <input class="form-input" name="emoji" type="text" id="emoji" value="{{ formData?.element?.emoji }}" autocomplete="off" >
     </div>
+  </div>
+
+  <div class="form-section" *ngIf="formData?.type == 'link'" >
+    <label class="form-label" for="group">Group</label>
+    <select class="form-input" name="group" id="group">
+      <option class="form-option" value="">Ninguno</option>
+      <option class="form-option" *ngFor="let o of groups" value="{{ o.id }}">{{ o.name }}</option>
+    </select>
   </div>
 
   <button class="form-button">{{ formData?.element ? 'Actualizar' : (formData?.type == 'group' ? 'Crear' : 'Agregar') }}</button>

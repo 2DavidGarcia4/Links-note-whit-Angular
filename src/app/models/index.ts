@@ -10,6 +10,7 @@ export interface Link {
   id: number
   url: string
   name: string
+  groupId?: number
   description: string
 }
 
@@ -20,6 +21,7 @@ export interface FocusedElement {
   type: 'link' | 'group'
   color?: string
   emoji?: string
+  groupId?: number
   description: string
 }
 

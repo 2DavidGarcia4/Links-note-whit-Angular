@@ -13,7 +13,7 @@
   </div>
   
   <ul class="header-groups">
-    <app-group class="header_group header-group" *ngFor="let g of groups" [group]="g" [attr.data-name]="g.name" [isOpen]="isOpen" [option]="option" (tooltip)="emitTooltip($event)" (optionEvent)="emitOption($event)" (focusedElement)="emitFocusedElement($event)" />
+    <app-group class="header_group header-group" *ngFor="let g of groups" [group]="g" [attr.data-name]="g.name" [isOpen]="isOpen" [option]="option" (tooltip)="emitTooltip($event)" (optionEvent)="emitOption($event)" (focusedElement)="emitFocusedElement($event)" (configRefOutput)="emitConfigRef($event)" />
     
     <li class="option" (click)="toggleOptions('add')" #addOption  (mousemove)="createOptionTooltip()" (mouseleave)="deleteTooltip()" >
       <div class="option-icon" data-name="Agregar">

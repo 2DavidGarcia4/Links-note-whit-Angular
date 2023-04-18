@@ -59,7 +59,7 @@
       justify-content: center;
 
       &:hover{
-        animation: Gearr 0.7s ease forwards;
+        animation: Gear 0.7s ease forwards;
       }
     }
   }
@@ -100,7 +100,7 @@
   }
 }
 
-@keyframes Gearr {
+@keyframes Gear {
   100%{
     transform: rotate(360deg);
   }

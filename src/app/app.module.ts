@@ -9,6 +9,8 @@ import { HeaderComponent } from './components/header/header.component';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { GroupComponent } from './components/group/group.component';
 import { FormComponent } from './components/form/form.component';
+import { HomeComponent } from './pages/home/home.component';
+import { LinkCardComponent } from './components/link-card/link-card.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +18,9 @@ import { FormComponent } from './components/form/form.component';
     HeaderComponent,
     ToolbarComponent,
     GroupComponent,
-    FormComponent
+    FormComponent,
+    LinkCardComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),

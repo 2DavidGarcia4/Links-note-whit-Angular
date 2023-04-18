@@ -15,6 +15,7 @@ export class HeaderComponent {
   @Output() tooltip = new EventEmitter<Tooltip | undefined>()
   @Output() optionEvent = new EventEmitter<Option | undefined>()
   @Output() focusedElement = new EventEmitter<FocusedElement | undefined>()
+  @Output() configRefOutput = new EventEmitter<ElementRef<HTMLDivElement>>()
 
   @ViewChild('container', {static: true}) containerRef!: ElementRef<HTMLDivElement>
   @ViewChild('principalImg', {static: true}) principalImgRef!: ElementRef<HTMLDivElement>
@@ -81,5 +82,9 @@ export class HeaderComponent {
         type
       })
     }
+  }
+
+  emitConfigRef(ref: ElementRef<HTMLDivElement>) {
+    this.configRefOutput.emit(ref)
   }
 }

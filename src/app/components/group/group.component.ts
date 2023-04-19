@@ -1,5 +1,5 @@
 import { Component, Input, ViewChild, ElementRef, Output, EventEmitter } from '@angular/core';
-import { Group, FocusedElement, Tooltip, Option } from 'src/app/models';
+import { Group, FocusedElement, Tooltip, Option, Link } from 'src/app/models';
 
 @Component({
   selector: 'app-group',
@@ -8,6 +8,7 @@ import { Group, FocusedElement, Tooltip, Option } from 'src/app/models';
 })
 export class GroupComponent {
   @Input() group!: Group;
+  @Input() links!: Link[];
   @Input() isOpen!: Boolean;
   @Input() option: Option | undefined
 
@@ -41,10 +42,11 @@ export class GroupComponent {
   createTooltip() {
     if(!this.isOpen){
       const rect = this.iconRef.nativeElement.getBoundingClientRect()
+      const linksByGroup = this.links.filter(l=> l.groupId == this.group.id)
       this.tooltip.emit({
         top: rect.top+Math.floor(rect.height/2),
         left: rect.left+rect.width+26,
-        content: this.group.name, 
+        content: `${this.group.name}${linksByGroup.length ? (' '+linksByGroup.length) : ''}`, 
         direction: 'left'
       })
     }

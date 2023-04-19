@@ -1,4 +1,4 @@
-<header class="header" [groups]="groups" [option]="option" (focusedElement)="setFocusedElement($event)" (tooltip)="createTooltip($event)" (optionEvent)="updateOption($event)" (configRefOutput)="setFocusedOptionRef($event)" ></header>
+<header class="header" [groups]="groups" [links]="links" [option]="option" (focusedElement)="setFocusedElement($event)" (tooltip)="createTooltip($event)" (optionEvent)="updateOption($event)" (configRefOutput)="setFocusedOptionRef($event)" ></header>
 
 <app-form [ngClass]="{'active': formData}" [formData]="formData" [groups]="groups" [links]="links" (close)="closeForm()" />
 

@@ -1,4 +1,5 @@
-import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, Output, ViewChild, OnInit } from '@angular/core';
+import { AppComponent } from 'src/app/app.component';
 import { FocusedElement, Group, Link, Option } from 'src/app/models';
 
 @Component({
@@ -11,36 +12,33 @@ export class LinkCardComponent implements OnInit {
   @Input() groups?: Group[]
   @Input() option?: Option
   
-  group?: Group
-
   @Output() optionEvent = new EventEmitter<Option | undefined>()
   @Output() focusedElement = new EventEmitter<FocusedElement | undefined>()
   @Output() configRefOutput = new EventEmitter<ElementRef<HTMLDivElement>>()
 
   @ViewChild('config', {static: true}) configRef!: ElementRef<HTMLDivElement> 
 
+  constructor(private appComponent: AppComponent) {}
 
   ngOnInit() {
-    if(this.link.groupId){
-      const group = this.groups?.find(g=> g.id == this.link.groupId)
-      this.group = group
-    }
+    this.option = this.appComponent.option
   }
 
   toggleOptions(type: Option['type']) {
+    this.option = this.appComponent.option
     this.configRef.nativeElement.classList.toggle('persist')
     this.configRefOutput.emit(this.configRef)
 
     if(this.option){
-      this.optionEvent.emit(undefined)
+      this.appComponent.option = undefined
     
     }else{
       const rect = this.configRef.nativeElement.getBoundingClientRect()
-      this.optionEvent.emit({
+      this.appComponent.option = {
         top: rect.top+Math.floor(rect.height/2),
         left: rect.left+rect.width+10,
         type
-      })
+      }
       this.focusedElement.emit({...this.link, type: 'link'})
     }
   }

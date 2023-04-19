@@ -1,14 +1,8 @@
 :host{
   width: 100%;
+  min-height: 100dvh;
   display: flex;
-  min-height: 100%;
   flex-direction: column;
-}
-
-.links-screen{
-  height: 100%;
-  border: 1px solid green;
-  overflow: auto;
 }
 
 .links{

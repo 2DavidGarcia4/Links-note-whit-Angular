@@ -1,13 +1,15 @@
-<div class="header_group-icon group-icon" #icon [style.background-color]="group.color" [attr.data-name]="group.name" (mouseenter)="createTooltip()" (mouseleave)="deleteTooltip()" >
-  <ng-container *ngIf="group.emoji">
-    <p class="header_group-icon-emoji">{{ group.emoji }}</p>
-  </ng-container>
-</div>
+<a class="header_group-link" routerLink="group/{{ group.id }}" routerLinkActive="selected" >
+  <div class="header_group-icon group-icon" #icon [style.background-color]="group.color" [attr.data-name]="group.name" (mouseenter)="createTooltip()" (mouseleave)="deleteTooltip()" >
+    <ng-container *ngIf="group.emoji">
+      <p class="header_group-icon-emoji">{{ group.emoji }}</p>
+    </ng-container>
+  </div>
+  
+  <div class="header_group-name group-name">
+    <p class="header_group-name-text">{{ group.emoji }} {{ group.name }}</p>
+  </div>
+</a>
 
-<div class="header_group-name group-name">
-  <p class="header_group-name-text">{{ group.emoji }} {{ group.name }}</p>
-</div>
-
-<div class="header_group-config group-config" #config (click)="toggleOptions('element')">
+<div class="header_group-config" #config (click)="toggleOptions('element')">
   <mat-icon>settings</mat-icon>
 </div>

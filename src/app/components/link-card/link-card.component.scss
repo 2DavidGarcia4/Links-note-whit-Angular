@@ -1,14 +1,35 @@
-:host:hover .link_card-config{
-  // cursor: pointer;
-  opacity: 1;
-  pointer-events: all;
+:host{
+  width: 86px;
+  cursor: pointer;
+  position: relative;
+  box-shadow: var(--Shadow);
+  border-radius: 6px;
+  background-color: var(--Element-color);
+  
+  &:hover {
+    z-index: 2;
 
-  &:hover{
-    animation: Gear 0.6s ease forwards;
+    & .link_card-config{
+      opacity: 1;
+      pointer-events: all;
+    
+      &:hover{
+        animation: Gear 0.6s ease forwards;
+      }
+    }
   }
 }
 
 .link_card{
+  &-wrap{
+    color: var(--Text-color);
+    padding: 10px;
+    display: flex;
+    row-gap: 6px;
+    flex-direction: column;
+    text-decoration: none;
+  }
+
   &-image{
     width: 64px;
     height: 64px;
@@ -32,6 +53,7 @@
   }
 
   &-details{
+    width: 100%;
     display: flex;
     justify-content: space-between;
   }
@@ -99,13 +121,16 @@
     &::before{
       top: 0;
       opacity: 0;
+      z-index: 10;
       content: attr(data-description);
-      padding: 0 6px;
-      font-size: 10px;
+      padding: 2px 6px;
       position: absolute;
-      box-shadow: var(--Shadow);
+      font-size: 10px;
+      min-width: 80px;
+      text-align: center;
+      line-height: 16px;
       transform: translateY(calc(-100% - 10px));
-      white-space: nowrap;
+      box-shadow: var(--Shadow);
       border-radius: 4px;
       pointer-events: none;
       background-color: var(--Tooltip-color);
@@ -116,7 +141,7 @@
       opacity: 0;
       content: '';
       border: 5px solid transparent;
-      z-index: 2;
+      z-index: 12;
       position: absolute;
       transform: translateY(-100%);
       pointer-events: none;

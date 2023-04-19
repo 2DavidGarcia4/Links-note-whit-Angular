@@ -1,16 +1,16 @@
-<div class="link_card-image">
-  <img src="https://www.google.com/s2/favicons?sz=64&domain_url={{ link.url }}" alt="{{ link.name}}">
-</div>
-
-<p class="link_card-text" >{{ link.name }}</p>
-<div class="link_card-details">
-  <div *ngIf="link.groupId" class="link_card-group" [style.border-color]="group?.color" [style.background-color]="group?.color ? group?.color+'60' : undefined" [attr.data-group]="group?.name" >
-    {{ group?.emoji }}
+<a class="link_card-wrap" [href]="link.url" target="_blank" [title]="link.name">
+  <div class="link_card-image">
+    <img src="https://www.google.com/s2/favicons?sz=64&domain_url={{ link.url }}" alt="{{ link.name}}">
   </div>
-  <div *ngIf="link.description" class="link_card-info" [attr.data-description]="link.description" >
-    <mat-icon>info</mat-icon>
+  
+  <p class="link_card-text" >{{ link.name }}</p>
+  <div class="link_card-details">
+    <app-link-group *ngIf="link.groupId && groups" class="link_card-group" [groupId]="link.groupId" [groups]="groups" />
+    <div *ngIf="link.description" class="link_card-info" [attr.data-description]="link.description" >
+      <mat-icon>info</mat-icon>
+    </div>
   </div>
-</div>
+</a>
 
 <div class="link_card-config" #config (click)="toggleOptions('element')" >
   <mat-icon>settings</mat-icon>

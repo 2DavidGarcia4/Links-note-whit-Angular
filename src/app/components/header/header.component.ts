@@ -1,5 +1,6 @@
 import { Component, ViewChild, ElementRef, Output, EventEmitter, Input } from '@angular/core';
-import { Group, Tooltip, Option, FocusedElement } from 'src/app/models';
+import { Router } from '@angular/router';
+import { Group, Tooltip, Option, FocusedElement, Link } from 'src/app/models';
 
 @Component({
   selector: 'header',
@@ -9,6 +10,7 @@ import { Group, Tooltip, Option, FocusedElement } from 'src/app/models';
 export class HeaderComponent {
   isOpen = false
   @Input() groups!: Group[]
+  @Input() links!: Link[]
   @Input() option: Option | undefined
 
   @Output() deletedGroupId = new EventEmitter<number>()
@@ -20,6 +22,8 @@ export class HeaderComponent {
   @ViewChild('container', {static: true}) containerRef!: ElementRef<HTMLDivElement>
   @ViewChild('principalImg', {static: true}) principalImgRef!: ElementRef<HTMLDivElement>
   @ViewChild('addOption', {static: true}) addOptionRef!: ElementRef<HTMLDivElement>
+
+  constructor(private router: Router) {}
 
   toggleOpen() {
     if(typeof document != 'undefined') {
@@ -86,5 +90,20 @@ export class HeaderComponent {
 
   emitConfigRef(ref: ElementRef<HTMLDivElement>) {
     this.configRefOutput.emit(ref)
+  }
+
+  redirect(elemnteRef: MouseEvent, groupId: number) {
+    this.router.navigate([`group/${groupId}`])
+    const groupElement = elemnteRef.currentTarget as HTMLElement || HTMLLinkElement
+    
+    if(!groupElement.classList.contains('selected')){
+      if(typeof document != 'undefined'){
+        const gropups = document.querySelectorAll('.groups-element')
+        gropups.forEach(gre=> {
+          gre.classList.remove('selected')
+        })
+        groupElement.classList.add('selected')
+      }
+    }
   }
 }

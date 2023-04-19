@@ -65,7 +65,6 @@ export class FormComponent implements OnChanges {
       }else{
         const url = this.formRef.nativeElement['url'].value
         const group = this.formRef.nativeElement['group'].value
-        console.log({group})
 
         if(this.formData?.element){
           const link = this.links.find(l=> l.id == this.formData?.element?.id)

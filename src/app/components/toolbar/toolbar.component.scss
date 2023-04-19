@@ -1,3 +1,16 @@
+:host{
+  width: 100%;
+  height: 64px;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  transition: background-color 0.5s ease, border 0.5s ease;
+  padding-right: 20px;
+  border-bottom: 2px solid var(--Border-color);
+  justify-content: flex-end;
+  background-color: var(--Element-color);
+}
+
 .toolbar{
   &_switch{
     width: 60px;

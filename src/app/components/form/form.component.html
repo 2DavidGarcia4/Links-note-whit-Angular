@@ -35,7 +35,7 @@
     <label class="form-label" for="group">Group</label>
     <select class="form-input" name="group" id="group">
       <option class="form-option" value="">Ninguno</option>
-      <option class="form-option" *ngFor="let o of groups" value="{{ o.id }}">{{ o.name }}</option>
+      <option class="form-option" *ngFor="let o of groups" [value]="o.id" [selected]="o.id == formData?.element?.groupId" >{{ o.name }}</option>
     </select>
   </div>
 

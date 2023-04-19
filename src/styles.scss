@@ -17,6 +17,7 @@
     -4px -4px 8px #ececec;
   --Border-color: #adadad;
   --Tooltip-color: #eeeeee;
+  --Selector-color: #4b4b4b;
 }
 
 *{
@@ -39,6 +40,7 @@ body.dark{
     -4px -4px 8px #2b2b2b;
   --Border-color: #0c0c0c;
   --Tooltip-color: #383838;
+  --Selector-color: #bbbbbb;
 }
 
 body{
@@ -66,13 +68,21 @@ mat-icon{
     opacity: 1;
   }
 
-  & .header_group:hover .group-icon{
-    border-radius: 0;
-    border-top-left-radius: 10px;
-    border-bottom-left-radius: 10px;
-    
-    &:hover{
-      box-shadow: none;
+  & .header_group-link:hover{
+    box-shadow: var(--Group-shadow);
+    border-radius: 10px;
+    background-color: var(--Background-color);
+  }
+
+  & .header_group:hover {
+    & .group-icon{
+      border-radius: 0;
+      border-top-left-radius: 10px;
+      border-bottom-left-radius: 10px;
+      
+      &:hover{
+        box-shadow: none;
+      }
     }
   }
 
@@ -85,11 +95,4 @@ mat-icon{
       display: none;
     }
   }
-}
-
-.header-group:hover .group-config{
-  opacity: 1;
-  cursor: pointer;
-  pointer-events: all;
-  
 }

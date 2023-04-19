@@ -15,8 +15,8 @@ export class HomeComponent implements OnInit {
   constructor(private appComponent: AppComponent) {}
 
   ngOnInit() {
-    this.links = this.appComponent.links
     this.groups = this.appComponent.groups
+    this.links = this.appComponent.links
     this.option = this.appComponent.option
   }
 
@@ -24,10 +24,11 @@ export class HomeComponent implements OnInit {
     this.appComponent.focusedElement = element
   }
 
-  updateOption(op: Option | undefined) {
-    this.option = op
-    this.appComponent.option = op
-  }
+  // updateOption(op: Option | undefined) {
+  //   console.log(op)
+  //   this.option = op
+  //   this.appComponent.option = op
+  // }
 
   setFocusedOptionRef(ref: ElementRef<HTMLDivElement>) {
     this.appComponent.focusedOptionRef = ref

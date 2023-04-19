@@ -1,4 +1,62 @@
+:host{
+
+  &:hover{
+    & .header_group-config{
+      opacity: 1;
+      cursor: pointer;
+      pointer-events: all;
+    }
+  }
+}
+
 .header_group{
+  &-link{
+    color: var(--Text-color);
+    cursor: pointer;
+    display: flex;
+    column-gap: 12px;
+    transition: background-color 0.3s, border-radius 0.4s, box-shadow 0.4s;
+    align-items: center;
+    border-radius: 20px;
+    text-decoration: none;
+
+    &::after{
+      left: -12px;
+      width: 2px;
+      height: 6px;
+      content: '';
+      opacity: 0;
+      position: absolute;
+      border-top-right-radius: 6px;
+      border-bottom-right-radius: 6px;
+      transition: background-color 0.5s ease, height 0.3s, opacity 0.3s, width 0.3s;
+      pointer-events: none;
+      background-color: var(--Selector-color);
+    }
+
+    &:hover{
+      &:after{
+        width: 6px;
+        height: 50%;
+        opacity: 1;
+      }
+
+      .open &{
+        box-shadow: var(--Group-shadow);
+        border-radius: 10px;
+        background-color: var(--Background-color);
+      }
+    }
+
+    &.selected{
+      &:after{
+        width: 6px;
+        height: 100%;
+        opacity: 1;
+      }
+    }
+  }
+
   &-icon{
     min-width: 40px;
     min-height: 40px;

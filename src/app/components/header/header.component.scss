@@ -1,3 +1,8 @@
+:host{
+  color: var(--Text-color);
+  text-decoration: none;
+}
+
 .header{
   &-toggle{
     height: 64px;
@@ -45,26 +50,41 @@
   }
 
   &_principal{
+    color: var(--Text-color);
     cursor: pointer;
     display: flex;
     position: relative;
     column-gap: 12px;
     align-items: center;
-    margin-bottom: 40px;
+    text-decoration: none;
 
     &::after{
-      left: 0;
-      width: 40px;
-      height: 2px;
-      bottom: -20px;
+      left: -12px;
+      width: 1px;
+      height: 6px;
       content: '';
+      opacity: 0;
       position: absolute;
-      transition: width 0.5s ease, background-color 0.5s ease;
+      border-top-right-radius: 6px;
+      border-bottom-right-radius: 6px;
+      transition: background-color 0.5s ease, height 0.3s, opacity 0.3s, width 0.3s;
       pointer-events: none;
-      background-color: var(--Border-color);
+      background-color: var(--Selector-color);
+    }
 
-      .open &{
-        width: 228px;
+    &.selected{
+      &:after{
+        width: 6px;
+        height: 100%;
+        opacity: 1;
+      }
+    }
+    
+    &:hover{
+      &:after{
+        width: 6px;
+        height: 50%;
+        opacity: 1;
       }
     }
 
@@ -109,23 +129,16 @@
     flex-direction: column;
   }
 
-  &_group{
-    cursor: pointer;
-    display: flex;
-    z-index: 1;
-    position: relative;
-    column-gap: 12px;
-    align-items: center;
-    border-radius: 20px;
-    transition: background-color 0.3s, border-radius 0.4s, box-shadow 0.4s;
+  &-separator{
+    width: 100%;
+    height: 2px;
+    transition: width 0.5s ease, background-color 0.5s ease;
+    pointer-events: none;
+    background-color: var(--Border-color);
+  }
 
-    &:hover{
-      .open &{
-        box-shadow: var(--Group-shadow);
-        border-radius: 10px;
-        background-color: var(--Background-color);
-      }
-    }
+  &_group{
+    position: relative;
   }
 }
 

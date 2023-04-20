@@ -32,7 +32,6 @@ import { GroupPageComponent } from './pages/group-page/group-page.component';
     AppRoutingModule,
     MatIconModule,
     NgOptimizedImage,
-    RouterModule
   ],
   providers: [],
   bootstrap: [AppComponent]

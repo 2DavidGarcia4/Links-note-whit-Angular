@@ -1,9 +1,9 @@
 export interface Group {
   id: number
   name: string
-  description: string
   color: string
   emoji?: string
+  description?: string
 }
 
 export interface Link {
@@ -11,7 +11,7 @@ export interface Link {
   url: string
   name: string
   groupId?: number
-  description: string
+  description?: string
 }
 
 export interface FocusedElement {
@@ -22,7 +22,7 @@ export interface FocusedElement {
   color?: string
   emoji?: string
   groupId?: number
-  description: string
+  description?: string
 }
 
 export interface FormElementData {

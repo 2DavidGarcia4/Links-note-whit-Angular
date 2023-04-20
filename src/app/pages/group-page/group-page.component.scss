@@ -1,17 +1,21 @@
 :host{
   width: 100%;
-  min-height: 100dvh;
+  height: 100dvh;
   display: flex;
   flex-direction: column;
 }
 
+.links-screen{
+  height: calc(100% - 64px);
+  overflow: auto;
+}
+
 .links{
   gap: 20px;
-  display: flex;
-  padding: 20px 20px 40px 20px;
   margin: 0 auto;
+  display: flex;
+  padding: 30px 20px 40px 20px;
   max-width: 1000px;
   flex-wrap: wrap;
-  max-height: calc(100dvh - 64px);
   justify-content: center;
 }

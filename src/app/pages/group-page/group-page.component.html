@@ -1,6 +1,8 @@
 <app-toolbar />
 
-<ul class="links">
-  <app-link-card *ngFor="let l of links" [link]="l" [groups]="groups" [option]="option"
-  (focusedElement)="setFocusedElement($event)" (configRefOutput)="setFocusedOptionRef($event)" (optionEvent)="updateOption($event)" />
-</ul>
+<div class="links-screen">
+  <ul class="links">
+    <app-link-card *ngFor="let l of links" [link]="l" [groups]="groups" [option]="option"
+    (focusedElement)="setFocusedElement($event)" (configRefOutput)="setFocusedOptionRef($event)" (optionEvent)="updateOption($event)" />
+  </ul>
+</div>

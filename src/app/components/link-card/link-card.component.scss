@@ -12,8 +12,8 @@
     & .link_card-config{
       opacity: 1;
       pointer-events: all;
-    
-      &:hover{
+      
+      &-icon:hover{
         animation: Gear 0.6s ease forwards;
       }
     }

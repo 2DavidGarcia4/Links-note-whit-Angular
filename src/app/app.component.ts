@@ -33,6 +33,23 @@ export class AppComponent {
         this.links = JSON.parse(localLinksData)
       }
     }
+
+    // for(let b=0; b<40; b++) {
+    //   let id = 0, v = 1
+    //   for(let i=0; i<v; i++){
+    //     const generation = Math.floor(Math.random()*888888)+111111
+    //     if(this.groups?.some(s=> s.id==generation)){
+    //       v++
+    //     }else id = generation
+    //   }
+  
+    //   this.links.push({
+    //     id, 
+    //     url: 'https://mail.google.com/',
+    //     name: 'Email-'+id, 
+    //     groupId: 6157, 
+    //   })
+    // }
   }
 
   setFormType(type: FormElementData['type']) {

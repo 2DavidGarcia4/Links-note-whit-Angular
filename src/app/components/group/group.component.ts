@@ -23,7 +23,17 @@ export class GroupComponent {
 
 
   toggleOptions(type: Option['type']) {
-    this.configRef.nativeElement.classList.toggle('persist')
+    if(!this.configRef.nativeElement.classList.contains('persist')){
+      if(typeof document != 'undefined'){
+        document.querySelectorAll('.header_group-config').forEach(e=> {
+          e.classList.remove('persist')
+        })
+      }
+      this.configRef.nativeElement.classList.add('persist')
+    }else{
+      this.configRef.nativeElement.classList.remove('persist')
+    }
+
     this.configRefOutput.emit(this.configRef)
     if(this.option){
       this.optionEvent.emit(undefined)

@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgOptimizedImage } from '@angular/common';
 import { MatIconModule  } from '@angular/material/icon'
-import { RouterModule } from '@angular/router';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -14,6 +13,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { LinkCardComponent } from './components/link-card/link-card.component';
 import { LinkGroupComponent } from './components/link-card/link-group/link-group.component';
 import { GroupPageComponent } from './pages/group-page/group-page.component';
+import { LinksComponent } from './components/links/links.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +26,7 @@ import { GroupPageComponent } from './pages/group-page/group-page.component';
     HomeComponent,
     LinkGroupComponent,
     GroupPageComponent,
+    LinksComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),

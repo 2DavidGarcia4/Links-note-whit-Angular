@@ -1,0 +1,2 @@
+<app-link-card *ngFor="let l of filteredLinks" [link]="l" [groups]="groups" [option]="option"
+    (focusedElement)="setFocusedElement($event)" (configRefOutput)="setFocusedOptionRef($event)" (optionEvent)="updateOption($event)" />

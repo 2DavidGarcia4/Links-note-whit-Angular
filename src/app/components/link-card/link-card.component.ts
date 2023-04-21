@@ -26,7 +26,18 @@ export class LinkCardComponent implements OnInit {
 
   toggleOptions(type: Option['type']) {
     this.option = this.appComponent.option
-    this.configRef.nativeElement.classList.toggle('persist')
+
+    if(!this.configRef.nativeElement.classList.contains('persist')){
+      if(typeof document != 'undefined'){
+        document.querySelectorAll('.link_card-config').forEach(e=> {
+          e.classList.remove('persist')
+        })
+      }
+      this.configRef.nativeElement.classList.add('persist')
+    }else{
+      this.configRef.nativeElement.classList.remove('persist')
+    }
+
     this.configRefOutput.emit(this.configRef)
 
     if(this.option){

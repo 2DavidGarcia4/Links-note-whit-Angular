@@ -14,14 +14,20 @@ export class GroupPageComponent implements OnInit {
   groups?: Group[]
   option?: Option
 
-  constructor(private route: ActivatedRoute, private appComponent: AppComponent) {}
-
-  ngOnInit() {
+  constructor(private route: ActivatedRoute, private appComponent: AppComponent) {
     this.route.params.subscribe(params=> {
       this.groupId = params['groupId']
-      this.links = this.appComponent.links.filter(l=> l.groupId == this.groupId)
     })
+    // this.links = this.appComponent.links
+  }
 
+  ngOnInit() {
+    // this.route.params.subscribe(params=> {
+    //   this.groupId = params['groupId']
+    //   this.links = this.appComponent.links.filter(l=> l.groupId == this.groupId)
+    // })
+
+    this.links = this.appComponent.links
     this.groups = this.appComponent.groups
     this.option = this.appComponent.option
   }

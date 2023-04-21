@@ -30,7 +30,7 @@
       <input class="form-input" name="emoji" type="text" id="emoji" value="{{ formData?.element?.emoji }}" autocomplete="off" >
     </div>
 
-    <div class="form-section mini">
+    <div class="form-section mini" *ngIf="formData?.element">
       <label class="form-label" for="position">Posición</label>
       <input class="form-input" name="position" type="number" id="position" [value]="formData?.element?.position" min="1" [max]="groups.length" autocomplete="off" >
     </div>

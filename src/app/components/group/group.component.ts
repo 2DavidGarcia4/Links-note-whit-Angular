@@ -1,4 +1,5 @@
-import { Component, Input, ViewChild, ElementRef, Output, EventEmitter } from '@angular/core';
+import { Component, Input, ViewChild, ElementRef, Output, EventEmitter, OnInit } from '@angular/core';
+import { AppComponent } from 'src/app/app.component';
 import { Group, FocusedElement, Tooltip, Option, Link } from 'src/app/models';
 
 @Component({
@@ -6,7 +7,9 @@ import { Group, FocusedElement, Tooltip, Option, Link } from 'src/app/models';
   templateUrl: './group.component.html',
   styleUrls: ['./group.component.scss']
 })
-export class GroupComponent {
+export class GroupComponent implements OnInit {
+  position?: number 
+  isHover = false
   @Input() group!: Group;
   @Input() links!: Link[];
   @Input() isOpen!: Boolean;
@@ -21,6 +24,11 @@ export class GroupComponent {
   @ViewChild('options', {static: true}) optionsRef!: ElementRef<HTMLDListElement>
   @ViewChild('icon', {static: true}) iconRef!: ElementRef<HTMLDivElement>
 
+  constructor(private appComponent: AppComponent) {}
+
+  ngOnInit() {
+    this.position = this.appComponent.groups.findIndex(g=> g.id == this.group.id) + 1
+  }
 
   toggleOptions(type: Option['type']) {
     if(!this.configRef.nativeElement.classList.contains('persist')){
@@ -48,24 +56,45 @@ export class GroupComponent {
         left: rect.left+rect.width+16,
         type
       })
-      this.focusedElement.emit({...this.group, type: 'group'})
+      this.focusedElement.emit({...this.group, position: this.position ? this.position : undefined, type: 'group'})
     }
   }
 
   createTooltip() {
+    const { description } = this.group
+
     if(!this.isOpen){
       const rect = this.iconRef.nativeElement.getBoundingClientRect()
       const linksByGroup = this.links.filter(l=> l.groupId == this.group.id)
       this.tooltip.emit({
         top: rect.top+Math.floor(rect.height/2),
         left: rect.left+rect.width+26,
+        type: 'normal',
         content: `${this.group.name}${linksByGroup.length ? (' '+linksByGroup.length) : ''}`, 
         direction: 'left'
       })
     }
+
+    if(description){
+      this.isHover = true
+
+      setTimeout(()=> {
+        if(this.isHover){
+          const rect = this.iconRef.nativeElement.getBoundingClientRect()
+          this.tooltip.emit({
+            top: rect.top+Math.floor(rect.height/2),
+            left: rect.left+rect.width+26,
+            type: 'description',
+            content: description, 
+            direction: 'left'
+          })
+        }
+      }, 3000)
+    }
   }
 
   deleteTooltip() {
+    if(this.isHover)this.isHover = false
     this.tooltip.emit(undefined)
   }
 }

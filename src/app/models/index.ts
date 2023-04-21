@@ -22,6 +22,7 @@ export interface FocusedElement {
   color?: string
   emoji?: string
   groupId?: number
+  position?: number
   description?: string
 }
 
@@ -33,6 +34,7 @@ export interface FormElementData {
 export interface Tooltip {
   top: number
   left: number
+  type: 'normal' | 'description'
   content: string
   direction: 'top' | 'left' | 'right' | 'bottom'
 } 

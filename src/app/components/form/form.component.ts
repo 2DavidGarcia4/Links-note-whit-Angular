@@ -24,20 +24,28 @@ export class FormComponent implements OnChanges {
       const name = this.formRef.nativeElement['nameIt'].value
       const description = this.formRef.nativeElement['description'].value
       
-      // console.log({name, description, color, emoji})
-
       if(this.formData?.type == 'group'){
         const emoji = this.formRef.nativeElement['emoji'].value
         const color = this.formRef.nativeElement['color'].value
-
+        
         if(this.formData.element){
+          const position = this.formRef.nativeElement['position'].value
           const group = this.groups.find(g=> g.id == this.formData?.element?.id)
+          const groupIndex = this.groups.findIndex(g=> g.id == this.formData?.element?.id)
+
           if(group){
             group.name = name
             group.description = description
             group.color = color
             group.emoji = emoji
+            
+            if(groupIndex != position-1){
+              this.groups.splice(groupIndex, 1)
+              this.groups.splice(position-1, 0, group)
+            }
           }
+
+
           localStorage.setItem('groups', JSON.stringify(this.groups))
 
         }else{

@@ -42,6 +42,11 @@ app-form{
   justify-content: center;
   background-color: var(--Tooltip-color);
 
+  &.description{
+    max-width: 300px;
+    white-space: normal;
+  }
+
   &::before{
     content: '';
     border: 7px solid transparent;

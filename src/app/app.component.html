@@ -2,7 +2,7 @@
 
 <app-form [ngClass]="{'active': formData}" [formData]="formData" [groups]="groups" [links]="links" (close)="closeForm()" />
 
-<div *ngIf="tooltip" class="tooltip {{ tooltip.direction }}"  [style.top]="tooltip.top+'px'" [style.left]="tooltip.left+'px'" >
+<div *ngIf="tooltip" class="tooltip {{ tooltip.type}} {{ tooltip.direction }}"  [style.top]="tooltip.top+'px'" [style.left]="tooltip.left+'px'" >
   {{ tooltip.content }}
 </div>
 

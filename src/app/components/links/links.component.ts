@@ -17,7 +17,6 @@ export class LinksComponent implements OnChanges {
   constructor(private appComponent: AppComponent) {}
 
   ngOnChanges() {
-    console.log('hola')
     this.filteredLinks = this.links?.filter(l=> l.groupId == this.groupId)
   }
 

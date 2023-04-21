@@ -33,6 +33,7 @@ export class HeaderComponent {
   }
 
   emitFocusedElement(element?: FocusedElement) {
+    console.log(element)
     this.focusedElement.emit(element)
   }
 
@@ -50,6 +51,7 @@ export class HeaderComponent {
       this.tooltip.emit({
         top: rect.top+Math.floor(rect.height/2),
         left: rect.left+rect.width+26,
+        type: 'normal',
         content, 
         direction: 'left'
       })
@@ -62,6 +64,7 @@ export class HeaderComponent {
       this.tooltip.emit({
         top: rect.top+Math.floor(rect.height/2),
         left: rect.left+rect.width+26,
+        type: 'normal',
         content: 'Agregar/crear', 
         direction: 'left'
       })

@@ -29,6 +29,9 @@ export class LinkCardComponent implements OnInit {
 
     if(!this.configRef.nativeElement.classList.contains('persist')){
       if(typeof document != 'undefined'){
+        document.querySelectorAll('.header_group-config').forEach(e=> {
+          e.classList.remove('persist')
+        })
         document.querySelectorAll('.link_card-config').forEach(e=> {
           e.classList.remove('persist')
         })
@@ -40,7 +43,7 @@ export class LinkCardComponent implements OnInit {
 
     this.configRefOutput.emit(this.configRef)
 
-    if(this.option){
+    if(this.option && !this.configRef.nativeElement.classList.contains('persist')){
       this.appComponent.option = undefined
     
     }else{

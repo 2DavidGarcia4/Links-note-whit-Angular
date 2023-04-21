@@ -28,6 +28,9 @@ export class GroupComponent {
         document.querySelectorAll('.header_group-config').forEach(e=> {
           e.classList.remove('persist')
         })
+        document.querySelectorAll('.link_card-config').forEach(e=> {
+          e.classList.remove('persist')
+        })
       }
       this.configRef.nativeElement.classList.add('persist')
     }else{
@@ -35,7 +38,7 @@ export class GroupComponent {
     }
 
     this.configRefOutput.emit(this.configRef)
-    if(this.option){
+    if(this.option && !this.configRef.nativeElement.classList.contains('persist')){
       this.optionEvent.emit(undefined)
     
     }else{

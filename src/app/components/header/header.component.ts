@@ -1,6 +1,7 @@
 import { Component, ViewChild, ElementRef, Output, EventEmitter, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { Group, Tooltip, Option, FocusedElement, Link } from 'src/app/models';
+import { version } from '../../../data';
 
 @Component({
   selector: 'header',
@@ -9,6 +10,7 @@ import { Group, Tooltip, Option, FocusedElement, Link } from 'src/app/models';
 })
 export class HeaderComponent {
   isOpen = false
+  version = version
   @Input() groups!: Group[]
   @Input() links!: Link[]
   @Input() option: Option | undefined

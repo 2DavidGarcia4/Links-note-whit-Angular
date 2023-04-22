@@ -5,13 +5,34 @@
   display: flex;
   align-items: center;
   transition: background-color 0.5s ease, border 0.5s ease;
+  padding-left: 12px;
   padding-right: 20px;
   border-bottom: 2px solid var(--Border-color);
-  justify-content: flex-end;
+  justify-content: space-between;
   background-color: var(--Element-color);
 }
 
 .toolbar{
+  &-info {
+    color: var(--Text-color);
+    text-decoration: none;
+
+    & mat-icon{
+      width: 40px !important;
+      height: 40px !important;
+      cursor: pointer;
+      display: flex;
+      transition: color 0.5s ease;
+      align-items: center;
+      border-radius: 6px;
+      justify-content: center;
+  
+      &:hover{
+        background-color: var(--Background-color);
+      }
+    }
+  }
+
   &_switch{
     width: 60px;
     cursor: pointer;

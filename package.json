@@ -1,6 +1,6 @@
 {
   "name": "links-note",
-  "version": "0.2.7",
+  "version": "1.2.5",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",

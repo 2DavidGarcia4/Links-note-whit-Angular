@@ -14,6 +14,7 @@ import { LinkCardComponent } from './components/link-card/link-card.component';
 import { LinkGroupComponent } from './components/link-card/link-group/link-group.component';
 import { GroupPageComponent } from './pages/group-page/group-page.component';
 import { LinksComponent } from './components/links/links.component';
+import { AboutComponent } from './pages/about/about.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { LinksComponent } from './components/links/links.component';
     HomeComponent,
     LinkGroupComponent,
     GroupPageComponent,
-    LinksComponent
+    LinksComponent,
+    AboutComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),

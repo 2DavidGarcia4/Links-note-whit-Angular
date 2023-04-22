@@ -12,21 +12,7 @@
   background-color: var(--Element-color);
 }
 
-app-form{
-  width: 100%;
-  height: 100%;
-  z-index: 400;
-  display: flex;
-  position: absolute;
-  transform: scale(0);
-  transition: transform 0.5s ease;
-  align-items: center;
-  justify-content: center;
 
-  &.active{
-    transform: scale(1);
-  }
-}
 
 .tooltip{
   z-index: 200;

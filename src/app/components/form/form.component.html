@@ -3,15 +3,14 @@
   <h3 class="form-title">{{ title }}</h3>
   <mat-icon class="form-close" (click)="closeForm()" >close</mat-icon>
 
-
   <div class="form-section">
     <label class="form-label" for="nameIt">Nombre</label>
-    <input #firstInput class="form-input" name="nameIt" type="text" id="nameIt" autocomplete="off" value="{{ formData?.element?.name || '' }}" minlength="2" maxlength="20" required >
+    <input #firstInput class="form-input" name="nameIt" type="text" id="nameIt" autocomplete="off" value="{{ formData?.element?.name || '' }}" minlength="2" maxlength="20" required onfocus="true" >
   </div>
 
-  <div class="form-section">
+  <div class="form-section" *ngIf="formData">
     <label class="form-label" for="description">Descripción</label>
-    <textarea (keyup)="hendleKeyUp($event)" class="form-input form-textarea" name="description" id="description" autocomplete="off" value="{{ formData?.element?.description}}" minlength="6" maxlength="600" > </textarea>
+    <textarea (keyup)="hendleKeyUp($event)" class="form-input form-textarea" #textArea name="description" id="description" autocomplete="off" value="{{ formData.element?.description}}" minlength="6" maxlength="600" > </textarea>
   </div>
 
   <div class="form-section" *ngIf="formData?.type == 'link'">

@@ -1,4 +1,4 @@
-import { Component, ElementRef} from '@angular/core';
+import { Component, ElementRef, OnInit } from '@angular/core';
 import { Group, Tooltip, Option, FocusedElement, FormElementData, Link } from './models';
 
 
@@ -7,7 +7,7 @@ import { Group, Tooltip, Option, FocusedElement, FormElementData, Link } from '.
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   groups: Group[] = []
   links: Link[] = []
   focusedElement?: FocusedElement

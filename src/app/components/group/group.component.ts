@@ -10,6 +10,7 @@ import { Group, FocusedElement, Tooltip, Option, Link } from 'src/app/models';
 export class GroupComponent implements OnInit {
   position?: number 
   isHover = false
+  timerId: any
   @Input() group!: Group;
   @Input() links!: Link[];
   @Input() isOpen!: Boolean;
@@ -66,28 +67,38 @@ export class GroupComponent implements OnInit {
     if(!this.isOpen){
       const rect = this.iconRef.nativeElement.getBoundingClientRect()
       const linksByGroup = this.links.filter(l=> l.groupId == this.group.id)
-      this.tooltip.emit({
-        top: rect.top+Math.floor(rect.height/2),
-        left: rect.left+rect.width+26,
-        type: 'normal',
-        content: `${this.group.name}${linksByGroup.length ? (' '+linksByGroup.length) : ''}`, 
-        direction: 'left'
-      })
+      if(typeof window != 'undefined'){
+        const wh = window.innerHeight
+        const top = rect.top+Math.floor(rect.height/2)
+
+        this.tooltip.emit({
+          top: (top + 24) > wh ? wh-24 : top,
+          left: rect.left+rect.width+26,
+          type: 'normal',
+          content: `${this.group.name}${linksByGroup.length ? (' '+linksByGroup.length) : ''}`, 
+          direction: 'left'
+        })
+      }
     }
 
     if(description){
       this.isHover = true
 
-      setTimeout(()=> {
+      this.timerId = setTimeout(()=> {
         if(this.isHover){
           const rect = this.iconRef.nativeElement.getBoundingClientRect()
-          this.tooltip.emit({
-            top: rect.top+Math.floor(rect.height/2),
-            left: rect.left+rect.width+26,
-            type: 'description',
-            content: description, 
-            direction: 'left'
-          })
+          if(typeof window != 'undefined'){
+            const wh = window.innerHeight
+            const top = rect.top+Math.floor(rect.height/2)
+          
+            this.tooltip.emit({
+              top: (top + 24) > wh ? wh-24 : top,
+              left: rect.left+rect.width+26,
+              type: 'description',
+              content: description, 
+              direction: 'left'
+            })
+          }
         }
       }, 3000)
     }
@@ -96,5 +107,6 @@ export class GroupComponent implements OnInit {
   deleteTooltip() {
     if(this.isHover)this.isHover = false
     this.tooltip.emit(undefined)
+    clearTimeout(this.timerId)
   }
 }

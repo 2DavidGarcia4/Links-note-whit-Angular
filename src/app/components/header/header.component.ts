@@ -50,8 +50,10 @@ export class HeaderComponent {
   createTooltip(content: string) {
     if(!this.isOpen){
       const rect = this.principalImgRef.nativeElement.getBoundingClientRect()
+      const top = rect.top+Math.floor(rect.height/2)
+
       this.tooltip.emit({
-        top: rect.top+Math.floor(rect.height/2),
+        top,
         left: rect.left+rect.width+26,
         type: 'normal',
         content, 
@@ -63,13 +65,18 @@ export class HeaderComponent {
   createOptionTooltip() {
     if(!this.isOpen){
       const rect = this.addOptionRef.nativeElement.getBoundingClientRect()
-      this.tooltip.emit({
-        top: rect.top+Math.floor(rect.height/2),
-        left: rect.left+rect.width+26,
-        type: 'normal',
-        content: 'Agregar/crear', 
-        direction: 'left'
-      })
+      if(typeof window != 'undefined'){
+        const wh = window.innerHeight
+        const top = rect.top+Math.floor(rect.height/2)
+
+        this.tooltip.emit({
+          top: (top + 24) > wh ? wh-24 : top,
+          left: rect.left+rect.width+26,
+          type: 'normal',
+          content: 'Agregar/crear', 
+          direction: 'left'
+        })
+      }
     }
   }
 
@@ -85,11 +92,16 @@ export class HeaderComponent {
     
     }else{
       const rect = this.addOptionRef.nativeElement.getBoundingClientRect()
-      this.optionEvent.emit({
-        top: rect.top+Math.floor(rect.height/2),
-        left: rect.left+rect.width+26,
-        type
-      })
+      if(typeof window != 'undefined'){
+        const wh = window.innerHeight
+        const top = rect.top+Math.floor(rect.height/2)
+
+        this.optionEvent.emit({
+          top: (top + 50) > wh ? wh-50 : top,
+          left: rect.left+rect.width+26,
+          type
+        })
+      }
     }
   }
 

@@ -19,7 +19,7 @@
     
     <app-group class="header_group groups-element" *ngFor="let g of groups" [group]="g" [links]="links" [isOpen]="isOpen" [option]="option" (tooltip)="emitTooltip($event)" (optionEvent)="emitOption($event)" (focusedElement)="emitFocusedElement($event)" (configRefOutput)="emitConfigRef($event)" />
     
-    <li class="option" (click)="toggleOptions('add')" #addOption  (mousemove)="createOptionTooltip()" (mouseleave)="deleteTooltip()" >
+    <li class="option" (click)="toggleOptions('add')" #addOption  (mouseover)="createOptionTooltip()" (mouseleave)="deleteTooltip()" >
       <div class="option-icon" data-name="Agregar">
         <mat-icon>add</mat-icon>
         <!-- <ng-container *ngIf="group.emoji">

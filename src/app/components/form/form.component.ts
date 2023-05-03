@@ -79,6 +79,7 @@ export class FormComponent implements OnChanges {
           if(link){
             link.name = name
             link.description = description
+            link.url = url
             
             if(group) link.groupId = parseInt(group) 
           }
